@@ -1,0 +1,48 @@
+{%- import 'macros.j2' as metric_macros -%}
+// DO NOT EDIT, this is an auto-generated file
+
+{% for root_ns in ctx %}
+    {% for metric in root_ns.metrics %}
+{{ ["## Description\n\n", metric.brief, concat_if("\n\n## Notes\n\n", metric.note), metric_macros.examples(metric)] | comment }}
+/// ## Metadata
+/// | | |
+/// |:-|:-
+/// | Instrument: | `{{ metric.instrument }}` |
+/// | Unit: | `{{ metric.unit }}` |
+/// | Status: | `{{ metric.stability | capitalize }}`  |
+        {% if metric.attributes %}
+///
+/// ## Attributes
+/// | Name | Requirement |
+/// |:-|:- |
+        {% endif %}
+        {% for attribute in metric.attributes | rejectattr("name", "in", params.excluded_attributes) | sort(attribute="name") %}
+            {% if attribute.requirement_level %}
+                {% if attribute.requirement_level.conditionally_required %}
+                    {% set req_level = "Conditionally_required" %}
+                    {% set req_message = attribute.requirement_level.conditionally_required %}
+                {% else %}
+                    {% set req_level = (attribute.requirement_level | capitalize) %}
+                    {% set req_message = attribute.requirement_level_msg %}
+                {% endif %}
+            {% else %}
+                {% set req_level = "Unspecified" %}
+                {% set req_message = '' %}
+            {% endif %}
+/// | [`crate::attribute::{{ attribute.name | screaming_snake_case }}`] | `{{ req_level }}`{{ (': ' + req_message.replace('\n', ' ') if req_message else '') }}
+        {% endfor %}
+        {% if metric.examples %}
+///
+/// ## Examples
+///
+            {% for example in metric.examples %}
+/// - `{{ example }}`
+            {% endfor %}
+        {% endif %}
+        {% if metric is deprecated %}
+#[deprecated(note="{{ metric.deprecated | replace('"', '') | replace('\n', ' ') | trim }}")]
+        {% endif %}
+pub const {{ metric.metric_name | screaming_snake_case }}: &str = "{{ metric.metric_name }}";
+
+    {% endfor %}
+{% endfor %}
