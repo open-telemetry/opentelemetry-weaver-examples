@@ -1,0 +1,27 @@
+# Whitespace control settings to simplify the definition of templates
+whitespace_control:
+  trim_blocks: true
+  lstrip_blocks: true
+
+# Configuration for the comment formatting
+comment_formats:
+  rust:
+    format: markdown
+    prefix: "/// "
+    trim: true
+    remove_trailing_dots: true
+    escape_square_brackets: true
+default_comment_format: rust
+
+params:
+  schema_url: "https://weaver-example.io/schemas/0.1.0"
+  exclude_root_namespace: ["service", "telemetry"]
+  excluded_attributes: []
+
+templates:
+  - pattern: attributes.rs.j2
+    filter: semconv_grouped_attributes($params)
+    application_mode: single
+  - pattern: metrics.rs.j2
+    filter: semconv_grouped_metrics($params)
+    application_mode: single

@@ -1,0 +1,23 @@
+groups:
+  - id: registry.example
+    type: attribute_group
+    display_name: Example Attributes
+    brief: Attributes used in the example application signals.
+    attributes:
+      - id: example.message
+        type: string
+        brief: A simple message
+        stability: development
+        examples: ["Hello, World!"]
+      - ref: host.name
+      - ref: host.arch
+
+  - id: registry.otel_sdk
+    type: attribute_group
+    display_name: Otel Attributes
+    brief: Attributes used by the OpenTelemetry SDK.
+    attributes:
+      - ref: service.name
+      - ref: telemetry.sdk.language
+      - ref: telemetry.sdk.version
+      - ref: telemetry.sdk.name
