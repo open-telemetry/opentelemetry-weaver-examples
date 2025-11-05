@@ -13,6 +13,11 @@ Install weaver by following the instructions from the [release](https://github.c
   - It defines a simple model dependent on the OpenTelemetry Semantic Conventions.
   - It shows how to generate docs and code, check and resolve the model, and use live-check with a sample application.
 
+- [Live-check Custom Advisor](custom_advisor/README.md)
+  - This example shows how to create and use a custom advisor with OpenTelemetry Weaver Live-check.
+  - It demonstrates implementing custom validation logic using Rego policies.
+  - It shows how to validate telemetry data against custom annotations in your semantic convention model.
+
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md).
