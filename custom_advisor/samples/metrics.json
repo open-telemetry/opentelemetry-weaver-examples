@@ -1,0 +1,38 @@
+[
+    {
+        "metric": {
+            "data_points": [
+                {
+                    "attributes": [
+                        {
+                            "name": "example.name",
+                            "value": "ID1234"
+                        }
+                    ],
+                    "value": 17
+                }
+            ],
+            "instrument": "counter",
+            "name": "example.counter",
+            "unit": "1"
+        }
+    },
+    {
+        "metric": {
+            "data_points": [
+                {
+                    "attributes": [
+                        {
+                            "name": "example.name",
+                            "value": "lowercaseid"
+                        }
+                    ],
+                    "value": 18
+                }
+            ],
+            "instrument": "counter",
+            "name": "example.counter",
+            "unit": "1"
+        }
+    }
+]
