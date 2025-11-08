@@ -14,7 +14,7 @@ groups:
 
   - id: registry.otel_sdk
     type: attribute_group
-    display_name: Otel Attributes
+    display_name: OTel Attributes
     brief: Attributes used by the OpenTelemetry SDK.
     attributes:
       - ref: service.name
