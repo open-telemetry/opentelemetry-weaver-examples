@@ -11,7 +11,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Setup Weaver
-        uses: kuklyy/weaver/.github/actions/setup-weaver@kuklyy/setup-weaver-action
+        uses: open-telemetry/weaver/.github/actions/setup-weaver@main
 
       - name: Generate Rust code
         run: |

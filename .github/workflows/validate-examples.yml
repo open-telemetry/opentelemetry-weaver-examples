@@ -11,7 +11,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Setup Weaver
-        uses: kuklyy/weaver/.github/actions/setup-weaver@kuklyy/setup-weaver-action
+        uses: open-telemetry/weaver/.github/actions/setup-weaver@main
 
       - name: Check model
         run: weaver registry check -r ./basic/model --diagnostic-format gh_workflow_command
@@ -26,7 +26,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Setup Weaver
-        uses: kuklyy/weaver/.github/actions/setup-weaver@kuklyy/setup-weaver-action
+        uses: open-telemetry/weaver/.github/actions/setup-weaver@main
 
       - name: Check model
         run: weaver registry check -r ./custom_advisor/model
