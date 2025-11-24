@@ -15,7 +15,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Setup Weaver
-        uses: open-telemetry/weaver/.github/actions/setup-weaver@main
+        uses: kuklyy/weaver/.github/actions/setup-weaver@kuklyy/setup-weaver-action
 
       - name: Generate documentation
         run: |
