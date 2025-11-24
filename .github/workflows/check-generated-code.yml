@@ -1,0 +1,46 @@
+name: Check Generated Code
+
+on:
+  pull_request:
+    paths:
+      - 'basic/model/**'
+      - 'basic/templates/**'
+      - 'basic/src/attributes.rs'
+      - 'basic/src/metrics.rs'
+  workflow_dispatch:
+
+jobs:
+  check-rust-code:
+    name: Check Generated Rust Code
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Weaver
+        uses: open-telemetry/weaver/.github/actions/setup-weaver@main
+
+      - name: Generate Rust code
+        run: |
+          cd basic
+          weaver registry generate \
+            -r ./model \
+            --templates ./templates \
+            rust ./src
+
+      - name: Check for uncommitted changes
+        run: |
+          cd basic
+          if ! git diff --exit-code ./src/attributes.rs ./src/metrics.rs; then
+            echo "❌ Generated code is out of sync!"
+            echo ""
+            echo "The generated Rust code differs from committed files."
+            echo "Please regenerate locally and commit the changes:"
+            echo ""
+            echo "  cd basic"
+            echo "  weaver registry generate -r ./model --templates ./templates rust ./src"
+            echo "  git add src/attributes.rs src/metrics.rs"
+            echo "  git commit -m 'chore: regenerate Rust code'"
+            echo ""
+            exit 1
+          fi
+          echo "✅ Generated code is up to date"

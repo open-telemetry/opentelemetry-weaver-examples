@@ -6,6 +6,16 @@ This repository contains a set of fully functional, working examples of using Op
 
 Install weaver by following the instructions from the [release](https://github.com/open-telemetry/weaver/releases) that matches your OS. Be sure to have weaver on your path for the commands in the examples to work.
 
+## Using Weaver in CI/CD
+
+This repository includes GitHub Actions workflows that demonstrate how to use Weaver in CI/CD pipelines:
+
+- **[Validate Examples](.github/workflows/validate-examples.yml)** - Validates semantic convention models and policies
+- **[Check Generated Code](.github/workflows/check-generated-code.yml)** - Ensures generated code stays in sync with models
+- **[Check Documentation](.github/workflows/check-docs.yml)** - Ensures generated documentation stays in sync with models
+
+These workflows use the [`setup-weaver`](https://github.com/open-telemetry/weaver/tree/main/.github/actions/setup-weaver) action to install Weaver. You can copy these patterns to your own repositories.
+
 ## Examples
 
 - [Basic](basic/README.md)

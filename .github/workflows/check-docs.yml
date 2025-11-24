@@ -1,0 +1,44 @@
+name: Check Documentation
+
+on:
+  pull_request:
+    paths:
+      - 'basic/model/**'
+      - 'basic/docs/**'
+  workflow_dispatch:
+
+jobs:
+  check-docs:
+    name: Check Generated Documentation
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Weaver
+        uses: open-telemetry/weaver/.github/actions/setup-weaver@main
+
+      - name: Generate documentation
+        run: |
+          cd basic
+          weaver registry generate \
+            -r ./model \
+            --templates "https://github.com/open-telemetry/semantic-conventions/archive/refs/tags/v1.37.0.zip[templates]" \
+            markdown ./docs
+
+      - name: Check for uncommitted changes
+        run: |
+          cd basic
+          if ! git diff --exit-code ./docs; then
+            echo "❌ Generated documentation is out of sync!"
+            echo ""
+            echo "The generated documentation differs from committed files."
+            echo "Please regenerate locally and commit the changes:"
+            echo ""
+            echo "  cd basic"
+            echo "  weaver registry generate -r ./model --templates \"https://github.com/open-telemetry/semantic-conventions/archive/refs/tags/v1.37.0.zip[templates]\" markdown ./docs"
+            echo "  git add docs/"
+            echo "  git commit -m 'docs: regenerate documentation'"
+            echo ""
+            exit 1
+          fi
+          echo "✅ Generated documentation is up to date"
