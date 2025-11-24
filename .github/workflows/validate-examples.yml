@@ -36,7 +36,5 @@ jobs:
 
       - name: Test policies with sample data
         run: |
-          weaver registry live-check \
-            -r ./custom_advisor/model \
-            -a ./custom_advisor/policies \
-            -s ./custom_advisor/samples/metrics.json
+          cd custom_advisor
+          weaver registry live-check -r model --input-source samples/metrics.json --advice-policies policies
