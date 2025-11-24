@@ -1,7 +1,6 @@
 name: Check Documentation
 
 on:
-  pull_request:
   workflow_dispatch:
 
 jobs:

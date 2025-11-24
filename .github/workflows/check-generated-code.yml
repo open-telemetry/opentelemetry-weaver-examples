@@ -1,7 +1,6 @@
 name: Check Generated Code
 
 on:
-  pull_request:
   workflow_dispatch:
 
 jobs:
