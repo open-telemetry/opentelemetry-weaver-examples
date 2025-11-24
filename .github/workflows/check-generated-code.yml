@@ -1,12 +1,6 @@
 name: Check Generated Code
 
 on:
-  pull_request:
-    paths:
-      - 'basic/model/**'
-      - 'basic/templates/**'
-      - 'basic/src/attributes.rs'
-      - 'basic/src/metrics.rs'
   workflow_dispatch:
 
 jobs:
