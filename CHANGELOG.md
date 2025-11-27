@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+# [Unreleased]
+
+- Added CI/CD workflow examples demonstrating setup-weaver action usage
+
 # [0.0.2] - 2025-11-05
 
 - Added Live-check Custom Advisor Example ([#5](https://github.com/open-telemetry/opentelemetry-weaver-examples/pull/11) by @jerbly)

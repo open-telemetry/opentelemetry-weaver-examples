@@ -1,0 +1,37 @@
+name: Validate Examples
+
+on:
+  workflow_dispatch:
+
+jobs:
+  validate-basic:
+    name: Validate Basic Example
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Weaver
+        uses: open-telemetry/weaver/.github/actions/setup-weaver@main
+
+      - name: Check model
+        run: weaver registry check -r ./basic/model --diagnostic-format gh_workflow_command
+
+      - name: Resolve registry
+        run: weaver registry resolve -r ./basic/model -o resolved.json
+
+  validate-custom-advisor:
+    name: Validate Custom Advisor
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Weaver
+        uses: open-telemetry/weaver/.github/actions/setup-weaver@main
+
+      - name: Check model
+        run: weaver registry check -r ./custom_advisor/model
+
+      - name: Test policies with sample data
+        run: |
+          cd custom_advisor
+          weaver registry live-check -r model --input-source samples/metrics.json --advice-policies policies
