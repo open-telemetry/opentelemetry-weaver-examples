@@ -42,7 +42,7 @@ Like the documentation, Weaver uses jinja templates to create code. In this case
 
 It's useful to see what your telemetry, as defined in your model, will look like in observability tools. `emit` generates OTLP with example data for each signal defined in your model. 
 
-To visualize the generated data, an example tool is [`otel-desktop-viewer`](https://github.com/CtrlSpice/otel-desktop-viewer) - a CLI tool for receiving OpenTelemetry Traces localy:
+To visualize the generated data, an example tool is [`otel-desktop-viewer`](https://github.com/CtrlSpice/otel-desktop-viewer) - a CLI tool for receiving OpenTelemetry Traces locally:
 
 `otel-desktop-viewer --browser-port 8001`
 
