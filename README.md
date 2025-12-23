@@ -28,6 +28,11 @@ These workflows use the [`setup-weaver`](https://github.com/open-telemetry/weave
   - It demonstrates implementing custom validation logic using Rego policies.
   - It shows how to validate telemetry data against custom annotations in your semantic convention model.
 
+- [Emit OTLP Logs](emit_otlp_logs/README.md)
+  - This example demonstrates how to set up the OpenTelemetry Collector to export to a running `weaver registry live-check` instance for continuous telemetry validation.
+  - It shows how to prevent infinite loops when Weaver sends Findings back to the collector.
+  - It illustrates how to integrate Weaver Findings into existing observability pipelines.
+
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md).

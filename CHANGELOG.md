@@ -4,7 +4,8 @@ All notable changes to this project will be documented in this file.
 
 # [Unreleased]
 
-- Added CI/CD workflow examples demonstrating setup-weaver action usage
+- Added CI/CD workflow examples demonstrating setup-weaver action usage ([#18](https://github.com/open-telemetry/opentelemetry-weaver-examples/pull/18) by @kuklyy)
+- Added Emit OTLP Logs Example demonstrating integration with OTel Collector and Weaver live-check ([#28](https://github.com/open-telemetry/opentelemetry-weaver-examples/pull/28) by @jerbly)
 
 # [0.0.2] - 2025-11-05
 
