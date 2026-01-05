@@ -1,0 +1,43 @@
+receivers:
+  otlp:
+    protocols:
+      grpc:
+        endpoint: localhost:4317
+      http:
+        endpoint: localhost:4318
+
+processors:
+  batch:
+  filter/weaver:
+    logs:
+      log_record:
+        - 'IsMatch(log.event_name, "^weaver")'
+
+exporters:
+  debug:
+    verbosity: detailed
+  nop/o11yservice: # No-op exporter for this example. Replace with your actual O11y service exporter.
+  otlp/weaver:
+    endpoint: "localhost:5317" # Weaver OTLP receiver
+    tls:
+      insecure: true # Weaver doesn't use TLS
+    compression: none # Weaver doesn't support gzip compression
+
+service:
+  pipelines:
+    traces:
+      receivers: [otlp]
+      processors: [batch]
+      exporters: [debug, nop/o11yservice, otlp/weaver]
+    metrics:
+      receivers: [otlp]
+      processors: [batch]
+      exporters: [debug, nop/o11yservice, otlp/weaver]
+    logs:
+      receivers: [otlp]
+      processors: [batch]
+      exporters: [debug, nop/o11yservice]
+    logs/weaver:
+      receivers: [otlp]
+      processors: [batch, filter/weaver]
+      exporters: [otlp/weaver]
