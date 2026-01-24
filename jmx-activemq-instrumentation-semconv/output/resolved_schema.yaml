@@ -1,0 +1,347 @@
+file_format: resolved/2.0.0
+attribute_catalog:
+- key: messaging.operation.type
+  type:
+    members:
+    - id: create
+      value: create
+      brief: |
+        A message is created. "Create" spans always refer to a single message and are used to provide a unique creation context for messages in batch sending scenarios.
+      stability: development
+    - id: send
+      value: send
+      brief: |
+        One or more messages are provided for sending to an intermediary. If a single message is sent, the context of the "Send" span can be used as the creation context and no "Create" span needs to be created.
+      stability: development
+    - id: receive
+      value: receive
+      brief: |
+        One or more messages are requested by a consumer. This operation refers to pull-based scenarios, where consumers explicitly call methods of messaging SDKs to receive messages.
+      stability: development
+    - id: process
+      value: process
+      brief: |
+        One or more messages are processed by a consumer.
+      stability: development
+    - id: settle
+      value: settle
+      brief: |
+        One or more messages are settled.
+      stability: development
+    - id: deliver
+      value: deliver
+      brief: Deprecated. Use `process` instead.
+      stability: development
+      deprecated:
+        reason: renamed
+        renamed_to: process
+        note: Replaced by `process`.
+    - id: publish
+      value: publish
+      brief: Deprecated. Use `send` instead.
+      stability: development
+      deprecated:
+        reason: renamed
+        renamed_to: send
+        note: Replaced by `send`.
+  brief: |
+    A string identifying the type of the messaging operation.
+  note: If a custom value is used, it MUST be of low cardinality.
+  stability: development
+- key: activemq.destination.type
+  type: string
+  examples:
+  - queue
+  - topic
+  brief: The type of the ActiveMQ destination.
+  stability: development
+- key: messaging.system
+  type:
+    members:
+    - id: activemq
+      value: activemq
+      brief: Apache ActiveMQ
+      stability: development
+    - id: aws.sns
+      value: aws.sns
+      brief: Amazon Simple Notification Service (SNS)
+      stability: development
+    - id: aws_sqs
+      value: aws_sqs
+      brief: Amazon Simple Queue Service (SQS)
+      stability: development
+    - id: eventgrid
+      value: eventgrid
+      brief: Azure Event Grid
+      stability: development
+    - id: eventhubs
+      value: eventhubs
+      brief: Azure Event Hubs
+      stability: development
+    - id: servicebus
+      value: servicebus
+      brief: Azure Service Bus
+      stability: development
+    - id: gcp_pubsub
+      value: gcp_pubsub
+      brief: Google Cloud Pub/Sub
+      stability: development
+    - id: jms
+      value: jms
+      brief: Java Message Service
+      stability: development
+    - id: kafka
+      value: kafka
+      brief: Apache Kafka
+      stability: development
+    - id: rabbitmq
+      value: rabbitmq
+      brief: RabbitMQ
+      stability: development
+    - id: rocketmq
+      value: rocketmq
+      brief: Apache RocketMQ
+      stability: development
+    - id: pulsar
+      value: pulsar
+      brief: Apache Pulsar
+      stability: development
+  brief: The messaging system as identified by the client instrumentation.
+  note: |
+    The actual messaging system may differ from the one known by the client. For example, when using Kafka client libraries to communicate with Azure Event Hubs, the `messaging.system` is set to `kafka` based on the instrumentation's best knowledge.
+  stability: development
+- key: server.port
+  type: int
+  examples:
+  - 80
+  - 8080
+  - 443
+  brief: Server port number.
+  note: |
+    When observed from the client side, and when communicating through an intermediary, `server.port` SHOULD represent the server port behind any intermediaries, for example proxies, if it's available.
+  stability: stable
+- key: messaging.destination.template
+  type: string
+  examples:
+  - /customers/{customerId}
+  brief: Low cardinality representation of the messaging destination name
+  note: |
+    Destination names could be constructed from templates. An example would be a destination name involving a user name or product id. Although the destination name in this case is of high cardinality, the underlying template is of low cardinality and can be effectively used for grouping and aggregation.
+  stability: development
+- key: error.type
+  type:
+    members:
+    - id: other
+      value: _OTHER
+      brief: |
+        A fallback error value to be used when the instrumentation doesn't define a custom value.
+      stability: stable
+  examples:
+  - amqp:decode-error
+  - KAFKA_STORAGE_ERROR
+  - channel-error
+  brief: |
+    Describes a class of error the operation ended with.
+  note: |
+    The `error.type` SHOULD be predictable, and SHOULD have low cardinality.
+
+    When `error.type` is set to a type (e.g., an exception type), its
+    canonical class name identifying the type within the artifact SHOULD be used.
+
+    Instrumentations SHOULD document the list of errors they report.
+
+    The cardinality of `error.type` within one instrumentation library SHOULD be low.
+    Telemetry consumers that aggregate data from multiple instrumentation libraries and applications
+    should be prepared for `error.type` to have high cardinality at query time when no
+    additional filters are applied.
+
+    If the operation has completed successfully, instrumentations SHOULD NOT set `error.type`.
+
+    If a specific domain defines its own set of error identifiers (such as HTTP or gRPC status codes),
+    it's RECOMMENDED to:
+
+    - Use a domain-specific attribute
+    - Set `error.type` to capture all errors, regardless of whether they are defined within the domain-specific set or not.
+  stability: stable
+- key: messaging.consumer.group.name
+  type: string
+  examples:
+  - my-group
+  - indexer
+  brief: |
+    The name of the consumer group with which a consumer is associated.
+  note: |
+    Semantic conventions for individual messaging systems SHOULD document whether `messaging.consumer.group.name` is applicable and what it means in the context of that system.
+  stability: development
+- key: server.address
+  type: string
+  examples:
+  - example.com
+  - 10.1.2.80
+  - /tmp/my.sock
+  brief: Server domain name if available without reverse DNS lookup; otherwise, IP address or Unix domain socket name.
+  note: |
+    Server domain name of the broker if available without reverse DNS lookup; otherwise, IP address or Unix domain socket name.
+  stability: stable
+- key: activemq.broker.name
+  type: string
+  examples:
+  - broker-1
+  - broker-xyz
+  brief: The name of the ActiveMQ broker.
+  stability: development
+- key: messaging.destination.name
+  type: string
+  examples:
+  - MyQueue
+  - MyTopic
+  brief: The message destination name
+  note: |
+    Destination name SHOULD uniquely identify a specific queue, topic or other entity within the broker. If
+    the broker doesn't have such notion, the destination name SHOULD uniquely identify the broker.
+  stability: development
+- key: messaging.destination.partition.id
+  type: string
+  examples: '1'
+  brief: |
+    The identifier of the partition messages are sent to or received from, unique within the `messaging.destination.name`.
+  stability: development
+- key: messaging.destination.subscription.name
+  type: string
+  examples:
+  - subscription-a
+  brief: The name of the destination subscription from which a message is consumed.
+  note: |
+    Semantic conventions for individual messaging systems SHOULD document whether `messaging.destination.subscription.name` is applicable and what it means in the context of that system.
+  stability: development
+- key: messaging.operation.name
+  type: string
+  examples:
+  - send
+  - receive
+  - ack
+  brief: |
+    The system-specific name of the messaging operation.
+  stability: development
+registry:
+  attributes:
+  - 8
+  - 1
+  attribute_groups: []
+  registry_url: ./model
+  spans: []
+  metrics:
+  - name: activemq.producer.count
+    instrument: updowncounter
+    unit: '{producer}'
+    attributes:
+    - base: 8
+      requirement_level: recommended
+    - base: 1
+      requirement_level: recommended
+    - base: 9
+      requirement_level:
+        conditionally_required: If span describes operation on a single message or if the value applies to all messages in the batch.
+    brief: The number of producers attached to this destination
+    stability: development
+  - name: messaging.client.operation.duration
+    instrument: histogram
+    unit: s
+    attributes:
+    - base: 5
+      requirement_level:
+        conditionally_required: If and only if the messaging operation has failed.
+    - base: 6
+      requirement_level:
+        conditionally_required: if applicable.
+    - base: 9
+      requirement_level:
+        conditionally_required: if and only if `messaging.destination.name` is known to have low cardinality. Otherwise, `messaging.destination.template` MAY be populated.
+    - base: 10
+      requirement_level: recommended
+    - base: 11
+      requirement_level:
+        conditionally_required: if applicable.
+    - base: 4
+      requirement_level:
+        conditionally_required: if available.
+    - base: 12
+      requirement_level: required
+    - base: 0
+      requirement_level:
+        conditionally_required: If applicable.
+    - base: 2
+      requirement_level: required
+    - base: 7
+      requirement_level:
+        conditionally_required: If available.
+    - base: 3
+      requirement_level: recommended
+    brief: Duration of messaging operation initiated by a producer or consumer client.
+    note: |
+      This metric SHOULD NOT be used to report processing duration - processing duration is reported in `messaging.process.duration` metric.
+    stability: development
+    annotations:
+      code_generation:
+        metric_value_type: double
+  events: []
+  entities: []
+refinements:
+  spans: []
+  metrics:
+  - id: activemq.producer.count
+    name: activemq.producer.count
+    instrument: updowncounter
+    unit: '{producer}'
+    attributes:
+    - base: 8
+      requirement_level: recommended
+    - base: 1
+      requirement_level: recommended
+    - base: 9
+      requirement_level:
+        conditionally_required: If span describes operation on a single message or if the value applies to all messages in the batch.
+    brief: The number of producers attached to this destination
+    stability: development
+  - id: messaging.client.operation.duration
+    name: messaging.client.operation.duration
+    instrument: histogram
+    unit: s
+    attributes:
+    - base: 5
+      requirement_level:
+        conditionally_required: If and only if the messaging operation has failed.
+    - base: 6
+      requirement_level:
+        conditionally_required: if applicable.
+    - base: 9
+      requirement_level:
+        conditionally_required: if and only if `messaging.destination.name` is known to have low cardinality. Otherwise, `messaging.destination.template` MAY be populated.
+    - base: 10
+      requirement_level: recommended
+    - base: 11
+      requirement_level:
+        conditionally_required: if applicable.
+    - base: 4
+      requirement_level:
+        conditionally_required: if available.
+    - base: 12
+      requirement_level: required
+    - base: 0
+      requirement_level:
+        conditionally_required: If applicable.
+    - base: 2
+      requirement_level: required
+    - base: 7
+      requirement_level:
+        conditionally_required: If available.
+    - base: 3
+      requirement_level: recommended
+    brief: Duration of messaging operation initiated by a producer or consumer client.
+    note: |
+      This metric SHOULD NOT be used to report processing duration - processing duration is reported in `messaging.process.duration` metric.
+    stability: development
+    annotations:
+      code_generation:
+        metric_value_type: double
+  events: []

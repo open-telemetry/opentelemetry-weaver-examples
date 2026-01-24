@@ -1,0 +1,27 @@
+file_format: definition/2.0.0
+attributes:
+  - key: activemq.broker.name
+    type: string
+    brief: The name of the ActiveMQ broker.
+    stability: development
+    examples: ["broker-1", "broker-xyz"]
+  - key: activemq.destination.type
+    type: string
+    brief: The type of the ActiveMQ destination.
+    stability: development
+    examples: ["queue", "topic"]
+metrics:
+  # based on https://github.com/open-telemetry/opentelemetry-java-instrumentation/blob/main/instrumentation/jmx-metrics/library/activemq.md
+  - name: activemq.producer.count
+    instrument: updowncounter
+    stability: development
+    brief: The number of producers attached to this destination
+    unit: "{producer}"
+    attributes:
+      - ref: messaging.destination.name
+      - ref: activemq.destination.type
+      - ref: activemq.broker.name
+imports:
+  metrics:
+    # this is not realistic, just an example of how to import existing metric
+    - messaging.client.operation.duration

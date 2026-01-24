@@ -1,0 +1,10 @@
+file_format: 2.0.0
+name: registry-with-dependencies
+description: This is a demo registry that includes dependencies on other registries.
+version: 1.0.0-dev
+repository_url: https://github.com/open-telemetry/opentelemetry-weaver/examples
+stability: development
+dependencies:
+  - name: otel
+    registry_path: https://github.com/open-telemetry/semantic-conventions/archive/refs/tags/v1.38.0.zip[model]
+
