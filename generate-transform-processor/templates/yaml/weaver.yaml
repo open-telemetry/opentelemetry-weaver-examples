@@ -1,0 +1,16 @@
+params:
+  next_version: ""
+templates:
+  - pattern: transformation-processor.j2
+    filter: >
+      {
+        attributes: [.registry.attributes? // [] | .[] | select(.deprecated.reason? == "renamed") | {old_name: .key, new_name: .deprecated.renamed_to}],
+        metrics: [.registry.metrics? // [] | .[] | select(.deprecated.reason? == "renamed") | {old_name: .name, new_name: .deprecated.renamed_to}],
+        next_version: $next_version
+      }
+    application_mode: single
+    file_name: transformation-processor.yaml
+whitespace_control:
+  trim_blocks: true
+  lstrip_blocks: true
+  keep_trailing_newline: true
