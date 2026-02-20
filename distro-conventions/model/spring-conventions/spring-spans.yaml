@@ -1,0 +1,23 @@
+file_format: definition/2.0.0
+attributes:
+  - key: spring-webmvc.view.type
+    type: string
+    brief: The type of the Spring Web MVC view.
+    stability: development
+    examples: ["com.app.MyView"]
+spans:
+  # based on https://github.com/open-telemetry/opentelemetry-java-instrumentation/tree/main/instrumentation/spring/spring-webmvc/spring-webmvc-6.0
+  - type: spring.webmvc.controller.span
+    stability: development
+    kind: internal
+    brief: Spring Web MVC controller span
+    name:
+      note: "render {spring-webmvc.view.type}"
+    attributes:
+      - ref: spring-webmvc.view.type
+      - ref: error.type
+imports:
+  metrics:
+    - http.server.*
+  # spans - not supported yet
+  # - http.server
