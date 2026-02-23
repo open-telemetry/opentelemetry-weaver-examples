@@ -1,0 +1,9 @@
+name: activemq-jmx-instrumentation
+description: This registry contains semantic conventions for ActiveMQ JMX instrumentation.
+version: 1.0.0-dev
+repository_url: https://github.com/open-telemetry/opentelemetry-java-instrumentation/blob/main/instrumentation/jmx-metrics/library/activemq.md
+stability: development
+dependencies:
+  - name: otel
+    registry_path: https://github.com/open-telemetry/semantic-conventions/archive/refs/tags/v1.38.0.zip[model]
+
