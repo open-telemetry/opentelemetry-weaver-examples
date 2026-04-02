@@ -3,7 +3,7 @@
 
 # OTel sdk
 
-## Otel Attributes
+## OTel Attributes
 
 Attributes used by the OpenTelemetry SDK.
 

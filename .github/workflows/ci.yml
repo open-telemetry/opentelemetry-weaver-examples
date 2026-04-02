@@ -1,0 +1,77 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build-and-test-basic:
+    name: Build and Test Basic Example
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: Setup Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Setup Weaver
+        uses: open-telemetry/weaver/.github/actions/setup-weaver@3400db9b532ac92f77d6410d7834873966dd67a4 # main
+
+      - name: Build
+        run: make -C basic build
+
+      - name: Test
+        run: make -C basic test
+
+  validate-basic:
+    name: Validate Basic Example
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: Setup Weaver
+        uses: open-telemetry/weaver/.github/actions/setup-weaver@3400db9b532ac92f77d6410d7834873966dd67a4 # main
+
+      - name: Check model
+        run: make -C basic check-model
+
+  check-generated-code:
+    name: Check Generated Rust Code
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: Setup Weaver
+        uses: open-telemetry/weaver/.github/actions/setup-weaver@3400db9b532ac92f77d6410d7834873966dd67a4 # main
+
+      - name: Check generated code
+        run: make -C basic check-generated
+
+  check-generated-docs:
+    name: Check Generated Documentation
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: Setup Weaver
+        uses: open-telemetry/weaver/.github/actions/setup-weaver@3400db9b532ac92f77d6410d7834873966dd67a4 # main
+
+      - name: Check generated docs
+        run: make -C basic check-generated-docs
+
+  validate-custom-advisor:
+    name: Validate Custom Advisor
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: Setup Weaver
+        uses: open-telemetry/weaver/.github/actions/setup-weaver@3400db9b532ac92f77d6410d7834873966dd67a4 # main
+
+      - name: Check model
+        run: make -C custom_advisor check-model
+
+      - name: Test policies with sample data
+        run: make -C custom_advisor test

@@ -34,9 +34,11 @@ Weaver can pass the resolved schema to jinja templates to render documentation. 
 
 ### Generate code
 
-Like the documentation, Weaver uses jinja templates to create code. In this case, custom templates are defined in this project. The command below will create the `attributes.rs` and `metrics.rs` files in the `src` directory right alongside the application code.
+Like the documentation, Weaver uses jinja templates to create code. In this case, custom templates are defined in this project. The command below will create the `attributes.rs` and `metrics.rs` files in the `src/generated` directory.
 
-`weaver registry generate -r model --templates templates rust src`
+`weaver registry generate -r model --templates templates rust src/generated`
+
+A `Makefile` is provided for convenience. Use `make generate` to generate code and `make generate-docs` to generate documentation.
 
 ### Emit example telemetry
 
