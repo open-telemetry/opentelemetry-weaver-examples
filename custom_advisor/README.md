@@ -39,6 +39,9 @@ The policy checks:
 When these conditions are met, it produces a "violation" level advice with the type `invalid_value_case`, providing a clear message about which attribute value failed the uppercase requirement.
 
 ## Run the example
+
+A `Makefile` is provided for convenience. Use `make check-model` to validate the model and `make test` to run the live-check with sample data.
+
 ```shell
 cd custom_advisor
 

@@ -1,5 +1,5 @@
-pub mod attributes;
-pub mod metrics;
+pub mod generated;
+use generated::{attributes, metrics};
 
 use anyhow::Result;
 use opentelemetry::trace::{Span, Tracer};
