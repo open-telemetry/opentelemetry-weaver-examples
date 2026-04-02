@@ -111,7 +111,7 @@ async fn main() -> Result<()> {
     };
 
     let tracer_provider = init_tracer_provider()?;
-    let _ = global::set_tracer_provider(tracer_provider.clone());
+    global::set_tracer_provider(tracer_provider.clone());
 
     let meter_provider = init_meter_provider()?;
     global::set_meter_provider(meter_provider.clone());
