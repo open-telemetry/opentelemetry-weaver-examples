@@ -127,4 +127,8 @@ jobs:
       - name: Test policies with sample data
         run: |
           cd custom_advisor
-          weaver registry live-check -r model --input-source samples/metrics.json --advice-policies policies
+          # This example demonstrates finding issues, so live-check exits non-zero.
+          # Capture output and verify the expected finding is present.
+          output=$(weaver registry live-check -r model --input-source samples/metrics.json --advice-policies policies 2>&1 || true)
+          echo "$output"
+          echo "$output" | grep -q "invalid_value_case"
