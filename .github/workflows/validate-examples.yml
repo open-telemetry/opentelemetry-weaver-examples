@@ -11,7 +11,7 @@ jobs:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
       - name: Setup Weaver
-        uses: open-telemetry/weaver/.github/actions/setup-weaver@main
+        uses: open-telemetry/weaver/.github/actions/setup-weaver@a9c8ec8fed389ae38c2c79acd499c63267c3c8e7 # main
 
       - name: Check model
         run: weaver registry check -r ./basic/model --diagnostic-format gh_workflow_command
@@ -26,7 +26,7 @@ jobs:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
       - name: Setup Weaver
-        uses: open-telemetry/weaver/.github/actions/setup-weaver@main
+        uses: open-telemetry/weaver/.github/actions/setup-weaver@a9c8ec8fed389ae38c2c79acd499c63267c3c8e7 # main
 
       - name: Check model
         run: weaver registry check -r ./custom_advisor/model
