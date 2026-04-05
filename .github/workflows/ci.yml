@@ -17,7 +17,7 @@ jobs:
         uses: dtolnay/rust-toolchain@29eef336d9b2848a0b548edc03f92a220660cdb8 # stable
 
       - name: Setup Weaver
-        uses: open-telemetry/weaver/.github/actions/setup-weaver@3400db9b532ac92f77d6410d7834873966dd67a4 # main
+        uses: open-telemetry/weaver/.github/actions/setup-weaver@95006fb2242bce936db833d7e0ab3ef5c1be76db # main
 
       - name: Build
         run: make -C basic build
@@ -32,7 +32,7 @@ jobs:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
       - name: Setup Weaver
-        uses: open-telemetry/weaver/.github/actions/setup-weaver@3400db9b532ac92f77d6410d7834873966dd67a4 # main
+        uses: open-telemetry/weaver/.github/actions/setup-weaver@95006fb2242bce936db833d7e0ab3ef5c1be76db # main
 
       - name: Check model
         run: make -C basic check-model
@@ -44,7 +44,7 @@ jobs:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
       - name: Setup Weaver
-        uses: open-telemetry/weaver/.github/actions/setup-weaver@3400db9b532ac92f77d6410d7834873966dd67a4 # main
+        uses: open-telemetry/weaver/.github/actions/setup-weaver@95006fb2242bce936db833d7e0ab3ef5c1be76db # main
 
       - name: Check generated code
         run: make -C basic check-generated
@@ -56,7 +56,7 @@ jobs:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
       - name: Setup Weaver
-        uses: open-telemetry/weaver/.github/actions/setup-weaver@3400db9b532ac92f77d6410d7834873966dd67a4 # main
+        uses: open-telemetry/weaver/.github/actions/setup-weaver@95006fb2242bce936db833d7e0ab3ef5c1be76db # main
 
       - name: Check generated docs
         run: make -C basic check-generated-docs
@@ -68,7 +68,7 @@ jobs:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
       - name: Setup Weaver
-        uses: open-telemetry/weaver/.github/actions/setup-weaver@3400db9b532ac92f77d6410d7834873966dd67a4 # main
+        uses: open-telemetry/weaver/.github/actions/setup-weaver@95006fb2242bce936db833d7e0ab3ef5c1be76db # main
 
       - name: Check model
         run: make -C custom_advisor check-model
