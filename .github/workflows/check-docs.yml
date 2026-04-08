@@ -11,7 +11,7 @@ jobs:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
       - name: Setup Weaver
-        uses: open-telemetry/weaver/.github/actions/setup-weaver@e97aff171e3fb2959132f06ae5aad8c4c74054e8 # main
+        uses: open-telemetry/weaver/.github/actions/setup-weaver@8af94b97f91d9990cbc9dcadff186138929f1f1a # main
 
       - name: Generate documentation
         run: |
