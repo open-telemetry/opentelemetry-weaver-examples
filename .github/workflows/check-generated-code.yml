@@ -3,6 +3,9 @@ name: Check Generated Code
 on:
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   check-rust-code:
     name: Check Generated Rust Code
