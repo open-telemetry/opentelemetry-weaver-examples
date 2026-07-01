@@ -3,6 +3,9 @@ name: Check Documentation
 on:
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   check-docs:
     name: Check Generated Documentation

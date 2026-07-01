@@ -3,6 +3,9 @@ name: Validate Examples
 on:
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   validate-basic:
     name: Validate Basic Example
