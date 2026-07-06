@@ -1,0 +1,45 @@
+name: Live Check Basic Example
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches: [main]
+    paths:
+      - '.github/workflows/live-check-basic.yml'
+      - 'basic/**'
+
+permissions:
+  contents: read
+
+jobs:
+  live-check-basic:
+    name: Live Check Basic Example
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+
+      - name: Setup Rust
+        uses: dtolnay/rust-toolchain@4be7066ada62dd38de10e7b70166bc74ed198c30 # stable
+
+      - name: Setup Weaver
+        uses: open-telemetry/weaver/.github/actions/setup-weaver@adcf6fda79c3df1cb537669442aef753b7019777 # v0.24.2
+
+      - name: Build basic example
+        run: make -C basic build
+
+      - name: Start live-check
+        id: live-check
+        uses: open-telemetry/weaver/.github/actions/weaver-live-check-start@adcf6fda79c3df1cb537669442aef753b7019777 # v0.24.2
+        with:
+          registry: ./basic/model
+
+      - name: Run basic example
+        env:
+          OTEL_EXPORTER_OTLP_ENDPOINT: ${{ steps.live-check.outputs.otlp-grpc-endpoint }}
+        run: cargo run --manifest-path basic/Cargo.toml -- "Hello, World!"
+
+      - name: Stop live-check
+        if: always()
+        uses: open-telemetry/weaver/.github/actions/weaver-live-check-stop@adcf6fda79c3df1cb537669442aef753b7019777 # v0.24.2
+        with:
+          fail-on: violation
