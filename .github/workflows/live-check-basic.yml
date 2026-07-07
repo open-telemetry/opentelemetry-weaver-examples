@@ -39,7 +39,19 @@ jobs:
         run: cargo run --manifest-path basic/Cargo.toml -- "Hello, World!"
 
       - name: Stop live-check
+        id: live-check-stop
         if: always()
         uses: open-telemetry/weaver/.github/actions/weaver-live-check-stop@adcf6fda79c3df1cb537669442aef753b7019777 # v0.24.2
         with:
           fail-on: violation
+
+      - name: Print live-check result
+        if: always()
+        run: |
+          echo "Weaver live-check result:"
+          echo "  samples:      ${{ steps.live-check-stop.outputs.samples }}"
+          echo "  violations:   ${{ steps.live-check-stop.outputs.violations }}"
+          echo "  improvements: ${{ steps.live-check-stop.outputs.improvements }}"
+          echo "  information:  ${{ steps.live-check-stop.outputs.informations }}"
+          echo
+          echo "See the job summary for finding messages and download the weaver-live-check-report artifact for the full JSON report."
