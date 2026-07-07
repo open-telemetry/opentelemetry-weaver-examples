@@ -13,8 +13,9 @@ This repository includes GitHub Actions workflows that demonstrate how to use We
 - **[Validate Examples](.github/workflows/validate-examples.yml)** - Validates semantic convention models and policies
 - **[Check Generated Code](.github/workflows/check-generated-code.yml)** - Ensures generated code stays in sync with models
 - **[Check Documentation](.github/workflows/check-docs.yml)** - Ensures generated documentation stays in sync with models
+- **[Live Check Basic Example](.github/workflows/live-check-basic.yml)** - Runs the basic example against the Weaver live-check GitHub Actions
 
-These workflows use the [`setup-weaver`](https://github.com/open-telemetry/weaver/tree/main/.github/actions/setup-weaver) action to install Weaver. You can copy these patterns to your own repositories.
+These workflows use the [`setup-weaver`](https://github.com/open-telemetry/weaver/tree/main/.github/actions/setup-weaver), [`weaver-live-check-start`](https://github.com/open-telemetry/weaver/tree/main/.github/actions/weaver-live-check-start), and [`weaver-live-check-stop`](https://github.com/open-telemetry/weaver/tree/main/.github/actions/weaver-live-check-stop) actions. You can copy these patterns to your own repositories.
 
 ## Examples
 

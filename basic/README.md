@@ -60,6 +60,8 @@ The application has been contrived so you can provoke a violation in `live-check
 
 The `live-check.rs` unit test checks for pass and fail by providing strings and ints as above.
 
+The [Live Check Basic Example](../.github/workflows/live-check-basic.yml) workflow shows the same application-level validation pattern in GitHub Actions using `weaver-live-check-start` and `weaver-live-check-stop`.
+
 ### Use live-check on the command line
 
 `weaver registry live-check -r model --inactivity-timeout 20`
