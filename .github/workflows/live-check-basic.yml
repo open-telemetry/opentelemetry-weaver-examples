@@ -24,14 +24,14 @@ jobs:
         uses: dtolnay/rust-toolchain@4360b52568e2003a75bf9bc1d59f33a8e3fc893c # stable
 
       - name: Setup Weaver
-        uses: open-telemetry/weaver/.github/actions/setup-weaver@adcf6fda79c3df1cb537669442aef753b7019777 # v0.24.2
+        uses: open-telemetry/weaver/.github/actions/setup-weaver@38befce4bc68fe320d20f189465c93835ac20c12 # v0.26.1
 
       - name: Build basic example
         run: make -C basic build
 
       - name: Start live-check
         id: live-check
-        uses: open-telemetry/weaver/.github/actions/weaver-live-check-start@adcf6fda79c3df1cb537669442aef753b7019777 # v0.24.2
+        uses: open-telemetry/weaver/.github/actions/weaver-live-check-start@38befce4bc68fe320d20f189465c93835ac20c12 # v0.26.1
         with:
           registry: ./basic/model
 
@@ -43,7 +43,7 @@ jobs:
       - name: Stop live-check
         id: live-check-stop
         if: always()
-        uses: open-telemetry/weaver/.github/actions/weaver-live-check-stop@adcf6fda79c3df1cb537669442aef753b7019777 # v0.24.2
+        uses: open-telemetry/weaver/.github/actions/weaver-live-check-stop@38befce4bc68fe320d20f189465c93835ac20c12 # v0.26.1
         with:
           fail-on: violation
 
