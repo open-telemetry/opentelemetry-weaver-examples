@@ -10,7 +10,7 @@ Weaver must be installed and available on your PATH. To run the example applicat
 
 ## Semantic convention model
 
-In the `model` directory is a model that defines attributes, spans and metrics. The OpenTelemetry Semantic Conventions project already defines a large set of attributes and signals which you can reference by declaring a dependency in `registry_manifest.yaml`.
+In the `model` directory is a model that defines attributes, spans and metrics. The OpenTelemetry Semantic Conventions project already defines a large set of attributes and signals which you can reference by declaring a dependency in `manifest.yaml`.
 
 To assist with authoring these yaml files, most modern IDEs support json schemas that provide inline feedback, hints and completion. This project contains an example for vscode. Weaver will also report any schema errors when you run any of its `registry` commands.
 
