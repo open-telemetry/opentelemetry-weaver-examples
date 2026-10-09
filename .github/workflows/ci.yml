@@ -19,7 +19,7 @@ jobs:
           persist-credentials: false
 
       - name: Setup Rust
-        uses: dtolnay/rust-toolchain@6bed0761d98439e5a578e2877258200ad565ba87 # stable
+        uses: dtolnay/rust-toolchain@686976e191b89faba57d3206551f0f330d8cb249 # stable
 
       - name: Setup Weaver
         uses: open-telemetry/weaver/.github/actions/setup-weaver@0f7c529d27eacc364824ad00a120566316c7247b # v0.27.0
